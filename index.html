@@ -5,705 +5,1253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FREE FIRE ID UNBAN — Premium Access</title>
   <meta name="description" content="FREE FIRE ID UNBAN premium access portal" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #05070c;
-      --line: rgba(149, 181, 230, .15);
-      --text: #f5f8ff;
-      --muted: #8e9ab0;
-      --hot: #ff4d2e;
-      --hot-2: #ff7a5c;
-      --green: #80e86e;
-      --gold: #ffb347;
-      --shadow: 0 28px 90px rgba(0,0,0,.48);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg-0: #08040f;
+      --bg-1: #0f0820;
+      --line: rgba(180, 130, 255, .14);
+      --text: #f5efff;
+      --muted: #9a8cb8;
+      --dim: #6a5a8a;
+      --violet: #a855f7;
+      --violet-2: #7c3aed;
+      --violet-3: #c084fc;
+      --gold: #fbbf24;
+      --gold-2: #f59e0b;
+      --cyan: #22d3ee;
+      --rose: #f43f5e;
+      --green: #4ade80;
+      --shadow: 0 30px 80px rgba(0,0,0,.7);
+      font-family: 'Space Grotesk', Inter, ui-sans-serif, system-ui, sans-serif;
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0; min-width: 320px; color: var(--text);
-      background:
-        radial-gradient(circle at 12% 8%, rgba(255, 77, 46, .18), transparent 28rem),
-        radial-gradient(circle at 92% 15%, rgba(255, 179, 71, .10), transparent 25rem),
-        linear-gradient(140deg, #03050a 0%, #08101d 48%, #03050a 100%);
+      background: var(--bg-0);
       min-height: 100vh; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
     }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .22;
-      background-image: linear-gradient(rgba(255,120,80,.04) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,120,80,.04) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, black, transparent 75%);
-    }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
 
-    /* ===== LOADER ===== */
-    #loader {
-      position: fixed; inset: 0; z-index: 9999;
-      display: grid; place-items: center;
-      background: #05070c;
-      transition: opacity .6s ease, visibility .6s ease;
+    .bg-wrap {
+      position: fixed; inset: 0; z-index: -1; overflow: hidden;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(168,85,247,.20), transparent 65%),
+        radial-gradient(ellipse 60% 50% at 100% 100%, rgba(251,191,36,.08), transparent 60%),
+        linear-gradient(180deg, #08040f 0%, #100822 45%, #08040f 100%);
     }
-    #loader.hide { opacity: 0; visibility: hidden; }
-    .loader-inner { text-align: center; }
-    .loader-svg { width: 160px; height: 160px; }
-    .loader-svg circle, .loader-svg rect, .loader-svg polygon {
-      animation: loaderPulse 1.6s ease-in-out infinite;
-      transform-origin: 50px 50px;
+    .bg-wrap::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(168,85,247,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, black 25%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, black 25%, transparent 70%);
     }
-    .loader-svg rect { animation-delay: .2s; }
-    .loader-svg polygon { animation-delay: .4s; }
-    @keyframes loaderPulse {
-      0%, 100% { opacity: .25; transform: scale(.9) rotate(0deg); }
-      50% { opacity: 1; transform: scale(1.05) rotate(45deg); }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45; }
+    .orb.o1 { width: 480px; height: 480px; top: -150px; left: -160px; background: #7c3aed; }
+    .orb.o2 { width: 400px; height: 400px; top: 35%; right: -140px; background: #a855f7; opacity: .35; }
+    .orb.o3 { width: 320px; height: 320px; bottom: -100px; left: 35%; background: #fbbf24; opacity: .14; }
+    @media (prefers-reduced-motion: no-preference) {
+      .orb.o1 { animation: orbFloat 20s ease-in-out infinite; }
+      .orb.o2 { animation: orbFloat 24s ease-in-out infinite reverse; }
+      .orb.o3 { animation: orbFloat 28s ease-in-out infinite; }
     }
-    .loader-text {
-      margin-top: 24px; color: var(--hot);
-      font-size: 13px; font-weight: 850;
-      letter-spacing: .28em; text-transform: uppercase;
-      animation: textFlash 1.4s ease-in-out infinite;
+    @keyframes orbFloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(50px,-40px) scale(1.1); }
     }
-    @keyframes textFlash { 0%,100%{opacity:.35} 50%{opacity:1} }
-    .loader-bar {
-      width: 220px; height: 3px; margin: 18px auto 0;
-      background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden;
+
+    button, input, select { font: inherit; color: inherit; }
+    button { cursor: pointer; border: 0; background: none; -webkit-tap-highlight-color: transparent; }
+    .shell { width: min(1140px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* ===== TICKER ===== */
+    .ticker {
+      height: 32px; overflow: hidden; position: relative;
+      background: linear-gradient(90deg, rgba(124,58,237,.35), rgba(168,85,247,.2), rgba(251,191,36,.15));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 11px; font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .03em;
     }
-    .loader-bar span {
-      display: block; height: 100%; width: 0;
-      background: linear-gradient(90deg, var(--hot), var(--gold));
-      animation: barFill 3.4s ease forwards;
+    .ticker-inner {
+      display: flex; align-items: center; gap: 40px;
+      height: 100%; padding-left: 100%;
+      animation: tickerScroll 55s linear infinite;
+      white-space: nowrap;
     }
-    @keyframes barFill { to { width: 100%; } }
+    .ticker-inner span { display: inline-flex; align-items: center; gap: 8px; }
+    .ticker-inner .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+    }
+    .ticker-inner b { color: var(--gold); }
+    @keyframes tickerScroll { to { transform: translateX(-100%); } }
 
     /* ===== TOPBAR ===== */
     .topbar {
-      position: sticky; top: 0; z-index: 10; height: 76px;
+      position: sticky; top: 0; z-index: 40; height: 76px;
       display: flex; align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,.075);
-      background: rgba(8, 9, 13, .7);
-      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      background: rgba(8, 4, 15, .82);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
     }
-    .topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,77,46,.72), transparent); opacity: .7; }
+    .topbar::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,.85), rgba(251,191,36,.5), transparent);
+    }
     .topbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .back-btn { display: none; align-items: center; gap: 8px; padding: 9px 14px; color: #fff; border: 1px solid rgba(255,122,92,.5); border-radius: 9px; background: rgba(255,77,46,.14); font-size: 12px; font-weight: 800; }
-    .back-btn:hover { border-color: #ff7a5c; background: rgba(255,77,46,.24); }
-    body.screen-details .back-btn, body.screen-payment .back-btn, body.screen-buy .back-btn, body.screen-buypay .back-btn { display: inline-flex; }
-    .brand { display: flex; align-items: center; gap: 11px; letter-spacing: -.02em; }
+    .brand { display: flex; align-items: center; gap: 12px; }
     .brand-mark {
-      width: 36px; height: 36px; display: grid; place-items: center;
-      border-radius: 11px; color: #1a0500; font-size: 17px; font-weight: 950;
-      background: linear-gradient(140deg, #ffb347, #ff4d2e 55%, #d92e0f);
-      box-shadow: 0 8px 24px rgba(255, 77, 46, .38);
-      transform: skew(-7deg);
+      width: 40px; height: 40px; display: grid; place-items: center;
+      border-radius: 12px; color: #180b2e; font-weight: 800; font-size: 18px;
+      background: linear-gradient(140deg, #e9d5ff, #a855f7 45%, #7c3aed);
+      box-shadow: 0 0 26px rgba(168,85,247,.55), inset 0 -2px 0 rgba(0,0,0,.25);
+      font-family: 'JetBrains Mono', monospace;
+      position: relative; overflow: hidden;
     }
-    .brand strong { font-size: 15px; }
-    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .12em; margin-top: 2px; }
-    .status-pill {
-      display: flex; align-items: center; gap: 8px; padding: 9px 13px;
-      color: #b8eeb0; border: 1px solid rgba(128,232,110,.2);
-      border-radius: 99px; background: rgba(128,232,110,.07); font-size: 12px; font-weight: 750;
-    }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
-
-    main { padding: 76px 0 62px; }
-
-    /* ===== FRONT PAGE ===== */
-    #frontPage { display: grid; place-items: center; min-height: calc(100vh - 190px); text-align: center; }
-    #frontPage h1 { font-size: clamp(42px, 8vw, 84px); line-height: .95; letter-spacing: -.07em; font-weight: 900; margin: 0 0 18px; }
-    #frontPage h1 span {
-      color: transparent;
-      background: linear-gradient(110deg, #fff 15%, #ffb347 51%, #ff4d2e 88%);
-      background-clip: text; -webkit-background-clip: text;
-    }
-    #frontPage > div > p { color: var(--muted); max-width: 520px; margin: 0 auto 20px; line-height: 1.7; font-size: 15px; }
-    .tap-hint {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-bottom: 34px; padding: 8px 16px;
-      color: #ffb347; border: 1px dashed rgba(255,179,71,.4);
-      border-radius: 99px; background: rgba(255,179,71,.06);
-      font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-      animation: hintPulse 2s ease-in-out infinite;
-    }
-    @keyframes hintPulse { 0%,100%{opacity:.7} 50%{opacity:1} }
-    .tap-hint svg { width: 14px; height: 14px; }
-
-    .front-options { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .front-opt {
-      position: relative; width: 280px; padding: 30px 24px;
-      border: 2px solid var(--line); border-radius: 22px;
-      background: linear-gradient(145deg, rgba(16,28,49,.94), rgba(5,9,17,.96));
-      box-shadow: var(--shadow);
-      transition: transform .25s, border-color .25s, box-shadow .25s;
-      text-align: left; cursor: pointer; overflow: hidden;
-    }
-    .front-opt::before {
+    .brand-mark::after {
       content: ""; position: absolute; inset: 0;
-      background: linear-gradient(120deg, transparent 40%, rgba(255,122,92,.08) 50%, transparent 60%);
-      transform: translateX(-100%); transition: transform .6s;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+      transform: translateX(-100%);
+      animation: shine 5s ease-in-out infinite;
     }
-    .front-opt:hover::before { transform: translateX(100%); }
-    .front-opt:hover { transform: translateY(-8px); border-color: rgba(255,77,46,.7); box-shadow: 0 30px 80px rgba(255,77,46,.22); }
-    .front-opt svg { width: 46px; height: 46px; margin-bottom: 18px; }
-    .front-opt h3 { margin: 0 0 8px; font-size: 21px; letter-spacing: -.03em; }
-    .front-opt p { margin: 0 0 16px; color: var(--muted); font-size: 12.5px; line-height: 1.6; }
-    .price-tag {
-      display: inline-flex; align-items: baseline; gap: 4px;
-      padding: 8px 14px; border-radius: 10px;
-      color: #1a0500; font-weight: 900; font-size: 17px;
-      background: linear-gradient(110deg, #ffb347, #ff4d2e);
-      box-shadow: 0 8px 20px rgba(255,77,46,.3);
-    }
-    .price-tag small { font-size: 11px; font-weight: 800; opacity: .8; }
-    .tap-cta {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: 18px; padding: 12px; border-radius: 10px;
-      color: #fff; background: rgba(255,77,46,.16);
-      border: 1px solid rgba(255,77,46,.4);
-      font-size: 13px; font-weight: 850; letter-spacing: .05em;
+    @keyframes shine { 0%,70% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    .brand-text strong {
+      display: block; font-size: 14px; letter-spacing: .06em; font-weight: 700;
       text-transform: uppercase;
     }
-    .front-opt:hover .tap-cta { background: rgba(255,77,46,.28); border-color: #ff4d2e; }
-    .tap-cta svg { width: 14px; height: 14px; margin: 0; }
+    .brand-text small {
+      display: block; color: var(--muted); font-size: 9px; font-weight: 600;
+      letter-spacing: .28em; margin-top: 3px; text-transform: uppercase;
+    }
+    .status-pill {
+      display: flex; align-items: center; gap: 9px; padding: 8px 14px;
+      color: #d8b4fe; border: 1px solid rgba(168,85,247,.3);
+      border-radius: 99px; background: rgba(168,85,247,.08);
+      font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity:.4; transform: scale(.85);} }
 
-    /* ===== SECTION CARD ===== */
-    .section-card {
-      padding: 30px; border: 1px solid var(--line); border-radius: 22px;
-      background: rgba(21,22,31,.78);
-      box-shadow: 0 18px 60px rgba(0,0,0,.2);
-      max-width: 640px; margin: 0 auto;
-      animation: rise .45s ease both;
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px 9px 12px;
+      color: #f0e5ff;
+      border: 1px solid rgba(168,85,247,.35);
+      border-radius: 99px;
+      background: linear-gradient(135deg, rgba(168,85,247,.15), rgba(124,58,237,.08));
+      box-shadow: 0 4px 16px rgba(168,85,247,.12), inset 0 1px 0 rgba(255,255,255,.08);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
     }
-    @keyframes rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
-    .section-card h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em; }
-    .section-sub { margin: 0 0 24px; color: var(--muted); line-height: 1.6; font-size: 13px; }
+    .back-btn .back-icon {
+      width: 22px; height: 22px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: rgba(168,85,247,.22);
+      border: 1px solid rgba(168,85,247,.4);
+      transition: transform .25s, background .25s;
+    }
+    .back-btn .back-icon svg {
+      width: 12px; height: 12px;
+      stroke: var(--violet-3);
+      transition: stroke .2s;
+    }
+    .back-btn:hover {
+      background: linear-gradient(135deg, rgba(168,85,247,.28), rgba(124,58,237,.15));
+      border-color: var(--violet);
+      box-shadow: 0 6px 24px rgba(168,85,247,.35), inset 0 1px 0 rgba(255,255,255,.1);
+      transform: translateX(-2px);
+    }
+    .back-btn:hover .back-icon { transform: translateX(-3px); background: rgba(168,85,247,.4); }
+    .back-btn:hover .back-icon svg { stroke: #fff; }
+    .back-btn:active { transform: translateX(-1px) scale(.98); }
+    body.screen-details .back-btn, body.screen-payment .back-btn { display: inline-flex; }
+
+    main { padding: 44px 0 80px; }
+
+    /* ===== GLASS CARD ===== */
+    .glass {
+      position: relative; border-radius: 24px;
+      background: linear-gradient(160deg, rgba(34, 18, 64, .78), rgba(12, 6, 24, .92));
+      border: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+      overflow: hidden;
+    }
+    .glass::before {
+      content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+      background: linear-gradient(140deg, rgba(168,85,247,.5), transparent 30%, transparent 70%, rgba(251,191,36,.35));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ===== LOGIN ===== */
+    .hero { min-height: calc(100vh - 220px); display: grid; place-items: center; }
+
+    .trust-strip {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin-bottom: 26px;
+    }
+    .trust-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 13px; border-radius: 99px;
+      background: rgba(168,85,247,.08);
+      border: 1px solid rgba(168,85,247,.22);
+      color: #d8b4fe; font-size: 10.5px; font-weight: 600;
+      letter-spacing: .06em; font-family: 'JetBrains Mono', monospace;
+    }
+    .trust-chip svg { width: 12px; height: 12px; }
+    .trust-chip.gold {
+      background: rgba(251,191,36,.08);
+      border-color: rgba(251,191,36,.3);
+      color: #fde68a;
+    }
+    .trust-chip.green {
+      background: rgba(74,222,128,.08);
+      border-color: rgba(74,222,128,.28);
+      color: #86efac;
+    }
+
+    .auth-card { width: min(100%, 460px); padding: 34px 32px; }
+    .card-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--violet-3); font-size: 10px; font-weight: 700;
+      letter-spacing: .3em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace;
+    }
+    .card-kicker::before {
+      content: ""; width: 22px; height: 1px; background: var(--violet-3);
+      box-shadow: 0 0 10px var(--violet-3);
+    }
+    .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 24px; }
+    h2 { margin: 10px 0 0; font-size: 26px; letter-spacing: -.02em; font-weight: 700; }
+    .secure-badge {
+      width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+      border: 1px solid rgba(168,85,247,.35); background: rgba(168,85,247,.1);
+      color: var(--violet-3);
+      box-shadow: 0 0 22px rgba(168,85,247,.2);
+    }
+    .secure-badge svg { width: 22px; height: 22px; }
+
+    .rating-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px; margin-bottom: 20px;
+      border-radius: 11px;
+      background: rgba(251,191,36,.06);
+      border: 1px solid rgba(251,191,36,.18);
+      font-size: 11.5px;
+    }
+    .stars { color: var(--gold); letter-spacing: 2px; font-size: 13px; }
+    .rating-row b { color: var(--gold); font-weight: 700; }
+    .rating-row span { color: var(--muted); font-size: 11px; }
+
     .form-group { margin: 18px 0; }
-    label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 9px; color: #b5b5bf; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    label span { color: var(--hot-2); text-transform: none; letter-spacing: 0; font-size: 10px; }
-    input {
-      width: 100%; height: 52px;
-      border: 1px solid rgba(255,255,255,.12); border-radius: 12px;
-      outline: none; padding: 0 15px; color: var(--text);
-      background: rgba(255,255,255,.055);
-      transition: border .2s, box-shadow .2s, background .2s;
-      font-size: 15px;
+    label {
+      display: flex; justify-content: space-between; gap: 12px;
+      margin-bottom: 9px; color: var(--muted); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
     }
-    input::placeholder { color: #686974; }
-    input:focus { border-color: rgba(255,122,92,.9); box-shadow: 0 0 0 4px rgba(255,77,46,.16); background: rgba(255,255,255,.08); }
+    label span { color: var(--violet-3); font-family: 'Space Grotesk', sans-serif; letter-spacing: 0; text-transform: none; font-size: 10px; }
+    .field-wrap { position: relative; }
+    input {
+      width: 100%; height: 54px; padding: 0 16px;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.4); color: var(--text);
+      outline: none; font-size: 14px;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    input::placeholder { color: var(--dim); }
+    input:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(168,85,247,.15), 0 0 32px rgba(168,85,247,.2);
+      background: rgba(0,0,0,.55);
+    }
+    .input-action {
+      position: absolute; right: 6px; top: 6px; height: 42px; padding: 0 14px;
+      color: var(--violet-3); border: 1px solid rgba(168,85,247,.3);
+      border-radius: 9px; background: rgba(168,85,247,.1);
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all .2s;
+    }
+    .input-action:hover { background: rgba(168,85,247,.22); border-color: var(--violet); }
+    .help-line { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; color: var(--dim); font-size: 10px; letter-spacing: .05em; font-family: 'JetBrains Mono', monospace; }
+    .copy-state { color: var(--violet-3); }
 
     .primary-btn {
-      width: 100%; height: 56px; margin-top: 6px;
-      border: 0; border-radius: 12px;
-      font-weight: 900; letter-spacing: .02em; font-size: 15px;
-      color: #1a0500;
-      background: linear-gradient(110deg, #ffb347, #ff4d2e 47%, #d92e0f);
-      box-shadow: 0 12px 28px rgba(255, 77, 46, .3);
-      transition: transform .2s, filter .2s, box-shadow .2s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; width: 100%; height: 58px;
+      border-radius: 14px; font-weight: 700; font-size: 14px;
+      letter-spacing: .1em; text-transform: uppercase; color: #1a0c02;
+      background: linear-gradient(110deg, #fef3c7 0%, #fbbf24 45%, #f59e0b 100%);
+      box-shadow: 0 12px 32px rgba(251,191,36,.4), inset 0 -2px 0 rgba(0,0,0,.2);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      overflow: hidden; margin-top: 12px;
+      transition: transform .2s, box-shadow .2s, filter .2s;
+      font-family: 'JetBrains Mono', monospace;
     }
-    .primary-btn:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 16px 33px rgba(255,77,46,.42); }
-    .primary-btn svg { width: 18px; height: 18px; }
+    .primary-btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.7) 50%, transparent 65%);
+      transform: translateX(-100%);
+    }
+    .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 46px rgba(251,191,36,.55), inset 0 -2px 0 rgba(0,0,0,.2); filter: brightness(1.05); }
+    .primary-btn:hover::before { animation: btnShine .9s ease; }
+    .primary-btn:active { transform: translateY(-1px); }
+    @keyframes btnShine { to { transform: translateX(100%); } }
+    .primary-btn svg { width: 16px; height: 16px; }
 
-    /* ===== SCREENS ===== */
-    #workspace, #buyPanel { display: none; min-height: calc(100vh - 190px); padding-top: 34px; }
-    #workspace.visible, #buyPanel.visible { display: block; }
-    #paymentPanel, #buyPayPanel { display: none; min-height: calc(100vh - 190px); padding-top: 34px; }
-    #paymentPanel.visible, #buyPayPanel.visible { display: block; }
+    /* ===== WORKSPACE ===== */
+    .workspace { display: none; min-height: calc(100vh - 200px); padding-top: 20px; }
+    .workspace.visible { display: block; animation: rise .5s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 
-    /* ===== PAYMENT LAYOUT (shared by unban + panel) ===== */
-    .payment-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; max-width: 920px; margin: 0 auto; }
-    .amount-card {
-      position: relative; overflow: hidden; padding: 30px;
-      border: 1px solid rgba(255,77,46,.34); border-radius: 22px;
-      background: linear-gradient(145deg, rgba(74,11,11,.86), rgba(25,7,7,.94));
-      animation: rise .45s ease both;
+    .steps {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 34px; color: var(--dim); font-size: 10px;
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
     }
-    .amount-card.gold {
-      border-color: rgba(255,179,71,.4);
-      background: linear-gradient(145deg, rgba(74,52,11,.86), rgba(25,17,7,.94));
+    .step { display: flex; align-items: center; gap: 10px; white-space: nowrap; transition: color .3s; }
+    .step-num {
+      display: grid; place-items: center; width: 28px; height: 28px;
+      border: 1px solid rgba(255,255,255,.15); border-radius: 50%;
+      font-size: 11px; transition: all .3s;
     }
-    .amount-card::after { content: "₹"; position: absolute; right: -9px; bottom: -44px; color: rgba(255,77,46,.12); font-size: 200px; font-weight: 900; line-height: 1; }
-    .amount-card.gold::after { color: rgba(255,179,71,.12); }
-    .amount-label { color: #ffb347; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
-    .amount { position: relative; z-index: 1; margin: 8px 0 4px; font-size: 62px; line-height: 1; letter-spacing: -.07em; font-weight: 900; }
-    .amount small { margin-left: 6px; color: #ff7a5c; font-size: 18px; letter-spacing: 0; }
-    .duration-pill {
-      display: inline-block; position: relative; z-index: 1;
-      margin-top: 10px; padding: 6px 14px;
+    .step.active { color: var(--violet-3); }
+    .step.active .step-num {
+      color: #180b2e; border-color: var(--violet); background: var(--violet);
+      box-shadow: 0 0 22px rgba(168,85,247,.7);
+    }
+    .step-line { width: 40px; height: 1px; background: rgba(255,255,255,.1); }
+
+    .section-card { max-width: 660px; margin: 0 auto; padding: 34px 32px; }
+    .section-card h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.01em; font-weight: 700; }
+    .section-sub { margin: 0 0 26px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    /* ===== GAME SELECT (DROPDOWN — polished) ===== */
+    .game-select-wrap { position: relative; }
+    .game-select {
+      width: 100%; height: 60px;
+      padding: 0 52px 0 58px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,255,255,.09);
+      background: linear-gradient(160deg, rgba(30,15,55,.6), rgba(12,6,24,.7));
+      color: var(--text);
+      outline: none;
+      font-size: 15px; font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    .game-select:hover {
+      border-color: rgba(168,85,247,.45);
+      background: linear-gradient(160deg, rgba(45,22,80,.7), rgba(20,10,40,.8));
+    }
+    .game-select:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(168,85,247,.15), 0 0 28px rgba(168,85,247,.22);
+    }
+    .game-select option {
+      background: #150b2b;
+      color: var(--text);
+      padding: 12px;
+    }
+    .game-select option:disabled { color: var(--dim); }
+
+    .game-select-icon {
+      position: absolute;
+      left: 12px; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; border-radius: 10px;
+      display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800; font-size: 12px;
+      pointer-events: none;
+      background: rgba(168,85,247,.15);
+      border: 1px solid rgba(168,85,247,.3);
+      color: var(--violet-3);
+      transition: all .25s;
+    }
+    .game-select-icon.bgmi {
+      background: linear-gradient(140deg, #fbbf24, #d97706);
+      border-color: rgba(251,191,36,.5);
+      color: #1a0c02;
+      box-shadow: 0 4px 12px rgba(251,191,36,.35);
+    }
+    .game-select-icon.ff {
+      background: linear-gradient(140deg, #f97316, #dc2626);
+      border-color: rgba(249,115,22,.5);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(249,115,22,.4);
+    }
+    .game-select-arrow {
+      position: absolute;
+      right: 18px; top: 50%; width: 10px; height: 10px;
+      border-right: 2px solid var(--violet-3);
+      border-bottom: 2px solid var(--violet-3);
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+      transition: transform .2s;
+    }
+
+    /* ===== REASON PICKER ===== */
+    .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .reason-option { position: relative; }
+    .reason-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .reason-option label {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin: 0; padding: 16px 14px; min-height: 68px;
+      border: 1px solid rgba(255,255,255,.09); border-radius: 13px;
+      color: #cbb9e8; background: rgba(0,0,0,.32);
+      cursor: pointer; font-size: 12.5px; font-weight: 600;
+      letter-spacing: 0; text-transform: none; line-height: 1.35;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all .2s;
+    }
+    .reason-option label::before {
+      content: ""; flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px;
+      border: 2px solid #4a3a6a; border-radius: 50%; transition: all .2s;
+    }
+    .reason-option label:hover { border-color: rgba(168,85,247,.5); background: rgba(168,85,247,.05); }
+    .reason-option input:checked + label {
+      color: #f5efff; border-color: var(--violet);
+      background: rgba(168,85,247,.12);
+      box-shadow: 0 0 0 4px rgba(168,85,247,.1);
+    }
+    .reason-option input:checked + label::before {
+      border: 5px solid var(--violet); background: #180b2e;
+      box-shadow: 0 0 14px rgba(168,85,247,.7);
+    }
+
+    /* ===== PAYMENT ===== */
+    .payment-panel { display: none; min-height: calc(100vh - 200px); padding-top: 20px; }
+    .payment-panel.visible { display: block; animation: rise .5s cubic-bezier(.2,.8,.2,1) both; }
+    .payment-layout {
+      display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px;
+      max-width: 980px; margin: 0 auto;
+    }
+
+    .amount-card { padding: 34px 30px; }
+    .scarcity-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 13px; margin-bottom: 16px;
       border-radius: 99px;
-      background: rgba(255,179,71,.14);
-      border: 1px solid rgba(255,179,71,.4);
-      color: #ffb347; font-size: 12px; font-weight: 850;
-      letter-spacing: .08em; text-transform: uppercase;
+      background: linear-gradient(110deg, rgba(244,63,94,.15), rgba(251,191,36,.12));
+      border: 1px solid rgba(244,63,94,.35);
+      color: #fda4af; font-size: 10.5px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      animation: scarcityPulse 2s ease-in-out infinite;
     }
-    .uid-display {
-      position: relative; z-index: 1;
-      margin: 16px 0 0; padding: 12px 14px;
-      border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.24);
-      font-size: 12px; color: #ffbaa9; font-weight: 750;
-      letter-spacing: .04em;
+    @keyframes scarcityPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(244,63,94,.4); }
+      50% { box-shadow: 0 0 0 8px rgba(244,63,94,0); }
     }
-    .uid-display b { color: #fff; font-weight: 900; letter-spacing: .1em; }
-    .timer-row { display: flex; align-items: center; gap: 10px; margin-top: 16px; color: #ffb347; font-size: 14px; font-weight: 850; position: relative; z-index: 1; }
-    .timer-row svg { width: 18px; height: 18px; }
-    .fake-warning { position: relative; z-index: 1; margin-top: 22px; padding: 14px 16px; border: 1px solid rgba(255,79,53,.38); border-radius: 12px; color: #ffbaa9; background: rgba(156,29,21,.16); text-align: center; font-size: 12px; font-weight: 900; letter-spacing: .05em; }
+    .scarcity-badge svg { width: 12px; height: 12px; }
 
-    .qr-card { padding: 26px; border: 1px solid var(--line); border-radius: 22px; background: rgba(21,22,31,.78); animation: rise .45s ease both; }
-    .qr-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
-    .qr-head h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
-    .qr-head p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
-    .step-badge {
-      padding: 6px 10px; border-radius: 8px;
-      color: #1a0500; background: linear-gradient(110deg, #ffb347, #ff4d2e);
-      font-size: 10px; font-weight: 900; letter-spacing: .1em;
-      white-space: nowrap;
+    .amount-label {
+      color: var(--violet-3); font-size: 10px; font-weight: 700;
+      letter-spacing: .3em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace;
     }
-    .qr-stage { display: grid; place-items: center; min-height: 220px; border: 1px dashed rgba(255,255,255,.13); border-radius: 14px; background: #f4f1e9; }
-    .qr-image { display: block; width: 200px; height: 200px; image-rendering: pixelated; border-radius: 6px; }
+    .amount {
+      margin: 12px 0 6px; font-size: 68px; line-height: 1; font-weight: 700;
+      letter-spacing: -.04em;
+      background: linear-gradient(110deg, #fff 15%, #fef3c7 45%, #fbbf24 75%, #f59e0b 95%);
+      background-clip: text; -webkit-background-clip: text; color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .amount small {
+      display: inline-block; margin-left: 8px; font-size: 16px;
+      color: var(--muted); -webkit-text-fill-color: var(--muted);
+      letter-spacing: .15em; font-weight: 500; vertical-align: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .strike-price {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+      font-size: 12.5px;
+    }
+    .strike-price s { color: var(--dim); text-decoration-thickness: 2px; }
+    .strike-price em {
+      font-style: normal; padding: 3px 8px; border-radius: 6px;
+      background: rgba(74,222,128,.15); color: #86efac;
+      font-size: 10px; font-weight: 800; letter-spacing: .08em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .validity { color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+
+    .ring-timer { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
+    .ring { position: relative; width: 76px; height: 76px; flex-shrink: 0; }
+    .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring-track { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 5; }
+    .ring-progress {
+      fill: none; stroke: url(#ringGrad); stroke-width: 5;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s linear;
+      filter: drop-shadow(0 0 8px rgba(251,191,36,.9));
+    }
+    .ring-time {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700;
+      color: #fff; letter-spacing: .05em;
+    }
+    .ring-meta { display: flex; flex-direction: column; gap: 3px; }
+    .ring-meta .lbl {
+      color: var(--violet-3); font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    }
+    .ring-meta .desc { color: var(--muted); font-size: 12px; }
+
+    .notice-box {
+      margin-top: 26px; padding: 16px 18px; border-radius: 12px;
+      background: rgba(0,0,0,.36); border: 1px solid rgba(255,255,255,.07);
+      border-left: 3px solid var(--violet);
+      color: #d5c7ec; font-size: 12.5px; line-height: 1.6;
+    }
+    .notice-box strong {
+      display: block; margin-bottom: 5px; color: var(--violet-3);
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .fake-warning {
+      margin-top: 18px; padding: 14px 16px; border-radius: 12px;
+      border: 1px dashed rgba(244,63,94,.45);
+      color: #fda4af; background: rgba(244,63,94,.08);
+      text-align: center; font-size: 11px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pay-card { padding: 30px 28px; display: flex; flex-direction: column; }
+    .pay-card-head { margin-bottom: 20px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .pay-card-head h3 { margin: 0 0 6px; font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+    .pay-card-head p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .instant-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border-radius: 99px; white-space: nowrap;
+      background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.35);
+      color: #86efac; font-size: 9.5px; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .instant-badge::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 8px #4ade80; animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .qr-stage {
+      position: relative; display: grid; place-items: center;
+      padding: 18px; margin-bottom: 8px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 2px solid transparent;
+      background-image:
+        linear-gradient(#ffffff, #ffffff),
+        linear-gradient(135deg, #a855f7, #7c3aed 30%, #fbbf24 70%, #f59e0b);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 10px 30px rgba(168,85,247,.18), inset 0 0 0 1px rgba(168,85,247,.1);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .qr-stage:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(168,85,247,.3); }
+    .qr-stage::after {
+      content: "🔍"; position: absolute; bottom: 8px; right: 12px;
+      font-size: 16px; opacity: .55; pointer-events: none;
+    }
+    .qr-image {
+      display: block;
+      width: 220px; height: 220px;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .qr-hint {
+      text-align: center; color: var(--dim); font-size: 10px;
+      letter-spacing: .18em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 18px;
+    }
+
     .upi-row {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      margin-top: 14px; padding: 12px 14px; border-radius: 10px;
-      color: #dedee5; background: rgba(255,255,255,.045);
-      font-size: 12px;
+      margin-bottom: 18px; padding: 13px 15px; border-radius: 11px;
+      color: #ede5ff; background: rgba(0,0,0,.36);
+      border: 1px solid rgba(255,255,255,.07);
+      font-size: 12px; font-family: 'JetBrains Mono', monospace;
     }
-    .upi-row code { color: #ff7a5c; font-size: 11.5px; font-weight: 800; word-break: break-all; }
-    .upi-row button { border: 0; color: #ffb347; background: none; font-size: 11px; font-weight: 850; white-space: nowrap; }
-    .payment-form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
-    .form-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .check-btn {
-      width: 100%; height: 56px; margin-top: 6px;
-      border: 0; border-radius: 12px;
-      font-weight: 900; font-size: 15px;
-      color: #1a0500;
-      background: linear-gradient(110deg, #ffb347, #ff4d2e 47%, #d92e0f);
-      box-shadow: 0 12px 28px rgba(255,77,46,.3);
-      transition: transform .2s, filter .2s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+    .upi-row code { color: var(--violet-3); font-size: 11.5px; font-weight: 600; word-break: break-all; }
+    .upi-row button {
+      color: var(--violet-3); font-size: 10px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 6px 10px; border-radius: 7px;
+      background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.28);
+      transition: all .2s;
     }
-    .check-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-2px); }
-    .check-btn:disabled { filter: grayscale(.6); transform: none; cursor: not-allowed; }
-    .check-btn svg { width: 18px; height: 18px; }
-    .check-status { margin-top: 14px; color: var(--muted); font-size: 12.5px; text-align: center; min-height: 18px; font-weight: 700; }
-    .check-status.error { color: #ff7a5c; font-weight: 850; }
-    .check-status.success { color: var(--green); font-weight: 850; }
+    .upi-row button:hover { background: rgba(168,85,247,.22); border-color: var(--violet); }
+    .upi-row button.copied {
+      background: rgba(74,222,128,.15);
+      border-color: rgba(74,222,128,.5);
+      color: #86efac;
+    }
 
-    /* ===== BUY PANEL INFO ===== */
-    .panel-intro { max-width: 920px; margin: 0 auto 22px; padding: 26px 28px; border: 1px solid var(--line); border-radius: 22px; background: rgba(21,22,31,.78); animation: rise .45s ease both; }
-    .panel-intro h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em; }
-    .panel-intro p { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .panel-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .panel-feature {
+    .pay-app-btn {
+      position: relative; width: 100%; height: 66px;
+      border-radius: 15px; font-weight: 700; font-size: 15px;
+      letter-spacing: .12em; text-transform: uppercase; color: #1a0c02;
+      background: linear-gradient(110deg, #fef3c7 0%, #fbbf24 45%, #f59e0b 100%);
+      box-shadow: 0 14px 36px rgba(251,191,36,.45), inset 0 -2px 0 rgba(0,0,0,.2);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s, filter .2s;
+      font-family: 'JetBrains Mono', monospace;
+      text-decoration: none;
+    }
+    .pay-app-btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.7) 50%, transparent 65%);
+      transform: translateX(-100%);
+    }
+    .pay-app-btn:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(251,191,36,.6), inset 0 -2px 0 rgba(0,0,0,.2); }
+    .pay-app-btn:hover::before { animation: btnShine 1s ease; }
+    .pay-app-btn:active { transform: translateY(-1px); }
+    .pay-app-btn svg { width: 22px; height: 22px; }
+    .pay-hint {
+      margin-top: 12px; text-align: center; color: var(--dim);
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .guarantee {
       display: flex; align-items: center; gap: 10px;
-      padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
-      background: rgba(255,255,255,.03);
-      font-size: 12.5px; color: #d8dde8; font-weight: 700;
+      margin-top: 18px; padding: 12px 14px; border-radius: 11px;
+      background: rgba(34,211,238,.06);
+      border: 1px solid rgba(34,211,238,.22);
+      color: #a5f3fc; font-size: 11px; font-weight: 600;
+      letter-spacing: .04em;
     }
-    .panel-feature svg { width: 16px; height: 16px; flex-shrink: 0; stroke: var(--green); }
+    .guarantee svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--cyan); }
 
-    footer { padding: 0 0 34px; color: #5f606a; text-align: center; font-size: 11px; }
-    .toast { position: fixed; z-index: 30; right: 20px; bottom: 20px; max-width: calc(100vw - 40px); padding: 12px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; color: #eee; background: #1b1c25; box-shadow: var(--shadow); font-size: 12.5px; font-weight: 700; transform: translateY(120px); opacity: 0; transition: .3s ease; }
+    footer {
+      padding: 0 0 40px; color: var(--dim); text-align: center;
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .toast {
+      position: fixed; z-index: 100; right: 20px; bottom: 20px;
+      max-width: calc(100vw - 40px); padding: 13px 16px;
+      border-radius: 12px; color: #f5efff;
+      background: rgba(24, 11, 46, .96);
+      border: 1px solid rgba(168,85,247,.45);
+      box-shadow: 0 20px 50px rgba(0,0,0,.7), 0 0 32px rgba(168,85,247,.25);
+      font-size: 12px; font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      transform: translateY(140px); opacity: 0;
+      transition: .35s cubic-bezier(.2,.8,.2,1);
+      pointer-events: none;
+    }
     .toast.show { transform: none; opacity: 1; }
 
-    body.screen-front #workspace, body.screen-front #paymentPanel, body.screen-front #buyPanel, body.screen-front #buyPayPanel { display: none; }
-    body.screen-details #frontPage, body.screen-details #paymentPanel, body.screen-details #buyPanel, body.screen-details #buyPayPanel { display: none; }
-    body.screen-payment #frontPage, body.screen-payment #workspace, body.screen-payment #buyPanel, body.screen-payment #buyPayPanel { display: none; }
+    .qr-modal {
+      position: fixed; inset: 0; z-index: 200;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+      background: rgba(4, 2, 10, .88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: fadeIn .25s ease;
+    }
+    .qr-modal.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .qr-modal-inner {
+      position: relative; max-width: 460px; width: 100%;
+      padding: 26px 24px 22px;
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(34,18,64,.96), rgba(12,6,24,.98));
+      border: 1px solid rgba(168,85,247,.35);
+      box-shadow: 0 30px 80px rgba(0,0,0,.75), 0 0 60px rgba(168,85,247,.25);
+      animation: popIn .3s cubic-bezier(.2,.9,.3,1.2);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .qr-modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; gap: 12px;
+    }
+    .qr-modal-head h3 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+    .qr-modal-head .amt {
+      color: var(--gold); font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 800;
+    }
+    .qr-modal-close {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: grid; place-items: center; flex-shrink: 0;
+      background: rgba(168,85,247,.12); border: 1px solid rgba(168,85,247,.3);
+      color: var(--violet-3); font-size: 18px; font-weight: 700;
+      transition: all .2s;
+    }
+    .qr-modal-close:hover { background: rgba(244,63,94,.18); border-color: rgba(244,63,94,.5); color: #fda4af; }
+    .qr-modal-img-wrap {
+      display: grid; place-items: center;
+      padding: 16px; border-radius: 16px;
+      background: #fff; margin-bottom: 16px;
+    }
+    .qr-modal-img {
+      display: block; width: 100%; max-width: 320px; height: auto;
+      border-radius: 6px;
+    }
+    .qr-modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .qr-modal-btn {
+      height: 50px; border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 12px; letter-spacing: .1em;
+      text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all .2s;
+    }
+    .qr-modal-btn svg { width: 16px; height: 16px; }
+    .qr-modal-btn.download {
+      color: #1a0c02;
+      background: linear-gradient(110deg, #fef3c7 0%, #fbbf24 45%, #f59e0b 100%);
+      box-shadow: 0 10px 24px rgba(251,191,36,.4);
+    }
+    .qr-modal-btn.download:hover { filter: brightness(1.08); transform: translateY(-2px); }
+    .qr-modal-btn.download:disabled { filter: grayscale(.4); transform: none; cursor: wait; }
+    .qr-modal-btn.close2 {
+      color: #e9d5ff;
+      background: rgba(168,85,247,.12);
+      border: 1px solid rgba(168,85,247,.3);
+    }
+    .qr-modal-btn.close2:hover { background: rgba(168,85,247,.22); }
+    .qr-modal-hint {
+      margin-top: 12px; text-align: center; color: var(--dim);
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    body.screen-details #hero, body.screen-details #paymentPanel,
+    body.screen-payment #hero, body.screen-payment #workspace { display: none; }
     body.screen-payment #paymentPanel { display: block; }
-    body.screen-buy #frontPage, body.screen-buy #workspace, body.screen-buy #paymentPanel, body.screen-buy #buyPayPanel { display: none; }
-    body.screen-buy #buyPanel { display: block; }
-    body.screen-buypay #frontPage, body.screen-buypay #workspace, body.screen-buypay #paymentPanel, body.screen-buypay #buyPanel { display: none; }
-    body.screen-buypay #buyPayPanel { display: block; }
+    body.screen-details .steps, body.screen-payment .steps { display: none; }
+    body.screen-details main, body.screen-payment main { padding-top: 30px; }
 
     @media (max-width: 850px) {
       .payment-layout { grid-template-columns: 1fr; }
-      #frontPage h1 { font-size: 52px; }
-      .front-opt { width: 100%; max-width: 360px; }
-      .panel-features { grid-template-columns: repeat(2, 1fr); }
+      .shell { width: min(100% - 28px, 1140px); }
+      main { padding-top: 32px; }
+      .trust-strip { gap: 8px; }
+      .trust-chip { font-size: 9.5px; padding: 6px 11px; }
     }
     @media (max-width: 520px) {
-      .shell { width: min(100% - 28px, 1120px); }
-      .topbar { height: 67px; }
-      .brand small { font-size: 8px; }
-      .section-card, .amount-card, .qr-card, .panel-intro { padding: 22px; border-radius: 18px; }
-      .form-cols, .panel-features { grid-template-columns: 1fr; }
-      .loader-svg { width: 120px; height: 120px; }
-      .amount { font-size: 52px; }
+      .ticker { font-size: 10px; height: 28px; }
+      .topbar { height: 68px; }
+      .brand-text small { font-size: 8px; letter-spacing: .2em; }
+      .status-pill { padding: 6px 10px; font-size: 9px; }
+      .status-pill .status-text { display: none; }
+      .back-btn { padding: 8px 12px 8px 9px; font-size: 10px; letter-spacing: .08em; }
+      .back-btn .back-icon { width: 20px; height: 20px; }
+      .auth-card, .section-card, .amount-card, .pay-card { padding: 24px 20px; border-radius: 20px; }
+      .reason-grid { grid-template-columns: 1fr; }
+      .amount { font-size: 54px; }
+      .ring { width: 64px; height: 64px; }
+      .ring-time { font-size: 13px; }
+      .steps { font-size: 9px; letter-spacing: .16em; gap: 6px; }
+      .step-line { width: 20px; }
+      .qr-image { width: 180px; height: 180px; }
+      .pay-app-btn { height: 58px; font-size: 13px; }
     }
   </style>
 </head>
-<body class="screen-front">
+<body>
 
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-inner">
-      <svg class="loader-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="34" stroke="#ff4d2e" stroke-width="4" stroke-dasharray="10 8" />
-        <rect x="30" y="30" width="40" height="40" rx="8" stroke="#ffb347" stroke-width="4" />
-        <polygon points="50,18 78,78 22,78" stroke="#ff7a5c" stroke-width="4" stroke-linejoin="round" />
-      </svg>
-      <div class="loader-text">Initializing Portal</div>
-      <div class="loader-bar"><span></span></div>
-    </div>
+  <div class="bg-wrap">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
   </div>
 
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.image2url.com/r2/default/audio/1790159602117-7fbfef5a-1ff3-4bf2-b391-ffcd4348d0db.mp3" type="audio/mpeg" />
-  </audio>
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span><span class="dot"></span> <b>Rahul</b> from Delhi just unbanned his account — 2 min ago</span>
+      <span><span class="dot"></span> <b>Priya</b> from Mumbai just unlocked ID — 4 min ago</span>
+      <span><span class="dot"></span> <b>Arjun</b> from Bangalore got his UID back — 6 min ago</span>
+      <span><span class="dot"></span> <b>Sameer</b> from Chennai — ban cleared — 9 min ago</span>
+      <span><span class="dot"></span> <b>Vikas</b> from Pune — ID unlocked — 11 min ago</span>
+      <span><span class="dot"></span> <b>Rohan</b> from Kolkata — account restored — 14 min ago</span>
+    </div>
+  </div>
 
   <!-- TOPBAR -->
   <header class="topbar">
     <div class="shell topbar-inner">
       <div class="brand">
-        <div class="brand-mark">U</div>
-        <div><strong>FREE FIRE ID UNBAN</strong><small>PREMIUM ACCESS PORTAL</small></div>
+        <div class="brand-mark">F</div>
+        <div class="brand-text">
+          <strong>Free Fire Unban</strong>
+          <small>Premium Access Portal</small>
+        </div>
       </div>
-      <button class="back-btn" id="backBtn" type="button">← Back</button>
-      <div class="status-pill"><span class="status-dot"></span> Online</div>
+      <button class="back-btn" id="backBtn" type="button">
+        <span class="back-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </span>
+        Back
+      </button>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span class="status-text">Live</span>
+      </div>
     </div>
   </header>
 
   <main class="shell">
 
-    <!-- ================= FRONT PAGE ================= -->
-    <section id="frontPage">
-      <div>
-        <h1>UNBAN YOUR<br /><span>FREE FIRE ACCOUNT</span></h1>
-        <p>Premium unban service. Fast check. UID protected. Owner review.</p>
-        <div class="tap-hint">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 114 0v5"/><path d="M13 11V9a2 2 0 114 0v2"/><path d="M17 11v-1a2 2 0 114 0v6a6 6 0 01-6 6h-3a6 6 0 01-6-6v-3a2 2 0 114 0"/></svg>
-          Tap any option below to continue
+    <!-- LOGIN -->
+    <section class="hero" id="hero">
+      <div style="width:100%;display:flex;flex-direction:column;align-items:center">
+
+        <div class="trust-strip">
+          <span class="trust-chip green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            12,847+ Trusted
+          </span>
+          <span class="trust-chip gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.3 5.5 21 7 14 2 9.3 9 9"/></svg>
+            4.9 Rating
+          </span>
+          <span class="trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Instant Delivery
+          </span>
+          <span class="trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            100% Secure
+          </span>
         </div>
-        <div class="front-options">
-          <div class="front-opt" id="optUnban" role="button" tabindex="0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff4d2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-            <h3>Unban Account</h3>
-            <p>Enter your UID and pay to start the unban process.</p>
-            <div class="price-tag">₹400 <small>INR</small></div>
-            <div class="tap-cta">
-              Tap to Unban
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+
+        <section class="glass auth-card" aria-labelledby="login-title">
+          <div class="card-head">
+            <div>
+              <div class="card-kicker">Unban Premium</div>
+              <h2 id="login-title">Access Portal</h2>
+            </div>
+            <div class="secure-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
             </div>
           </div>
-          <div class="front-opt" id="optBuy" role="button" tabindex="0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M7 8a3 3 0 010-6c2 0 5 3 5 6"/><path d="M17 8a3 3 0 000-6c-2 0-5 3-5 6"/></svg>
-            <h3>Buy Panel</h3>
-            <p>Premium ESP + aimbot panel access. Full features.</p>
-            <div class="price-tag">₹200 <small>7 DAYS</small></div>
-            <div class="tap-cta">
-              Tap to Buy
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-            </div>
+
+          <div class="rating-row">
+            <span class="stars">★★★★★</span>
+            <b>4.9</b>
+            <span>• 2,341 verified reviews</span>
           </div>
-        </div>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="accessKey">Login Key</label>
+              <div class="field-wrap">
+                <input id="accessKey" name="accessKey" type="text" value="accessffunbanid" autocomplete="off" spellcheck="false" />
+                <button class="input-action" id="pasteBtn" type="button">Paste</button>
+              </div>
+              <div class="help-line"><span>Encrypted</span><span class="copy-state" id="copyState">Copying…</span></div>
+            </div>
+            <button class="primary-btn" type="submit">
+              Unlock Access
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+        </section>
       </div>
     </section>
 
-    <!-- ================= DETAILS ================= -->
-    <section id="workspace">
-      <div class="section-card">
+    <!-- DETAILS -->
+    <section class="workspace" id="workspace">
+      <div class="steps">
+        <div class="step active"><span class="step-num">1</span> Account Details</div>
+        <span class="step-line"></span>
+        <div class="step"><span class="step-num">2</span> Payment</div>
+        <span class="step-line"></span>
+        <div class="step"><span class="step-num">3</span> Access Ready</div>
+      </div>
+      <section class="glass section-card">
         <h3>Account Details</h3>
-        <p class="section-sub">Enter your Free Fire UID to continue to payment.</p>
+        <p class="section-sub">Enter your game details to continue to payment.</p>
         <form id="detailsForm">
           <div class="form-group">
-            <label for="uid">Player UID <span>Numbers only</span></label>
+            <label for="game">Select Game</label>
+            <div class="game-select-wrap">
+              <span class="game-select-icon" id="gameIcon">?</span>
+              <select class="game-select" id="game" required>
+                <option value="" selected disabled>Choose your game</option>
+                <option value="BGMI">BGMI</option>
+                <option value="Free Fire">Free Fire</option>
+              </select>
+              <span class="game-select-arrow"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="uid">Player UID <span>Numbers Only</span></label>
             <input id="uid" type="text" inputmode="numeric" pattern="[0-9]+" maxlength="16" placeholder="Enter your numeric UID" required />
           </div>
+          <div class="form-group">
+            <label>Reason For Access</label>
+            <div class="reason-grid">
+              <div class="reason-option"><input id="reasonHack" type="radio" name="reason" value="USE H4CK" required /><label for="reasonHack">USE H4CK</label></div>
+              <div class="reason-option"><input id="reasonFree" type="radio" name="reason" value="OPEN ID TO BAN" /><label for="reasonFree">OPEN ID TO BAN</label></div>
+            </div>
+          </div>
           <button class="primary-btn" type="submit">
-            Continue to Payment
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            Verify & Continue
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
           </button>
         </form>
-      </div>
+      </section>
     </section>
 
-    <!-- ================= BUY PANEL INFO ================= -->
-    <section id="buyPanel">
-      <div class="panel-intro">
-        <h3>Premium Panel Access</h3>
-        <p>Full cheat panel. ESP, aimbot, auto-headshot and more. Instant access after payment. ₹200 for 7 days.</p>
-        <div class="panel-features">
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>ESP (Wallhack)</div>
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aimbot + Silent Aim</div>
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Auto Headshot</div>
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No Recoil + Fast Fire</div>
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Anti-Ban Protection</div>
-          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Instant Delivery</div>
-        </div>
+    <!-- PAYMENT -->
+    <section class="payment-panel" id="paymentPanel">
+      <div class="steps">
+        <div class="step active"><span class="step-num">1</span> Account Details</div>
+        <span class="step-line"></span>
+        <div class="step active"><span class="step-num">2</span> Payment</div>
+        <span class="step-line"></span>
+        <div class="step"><span class="step-num">3</span> Access Ready</div>
       </div>
-
-      <div class="payment-layout" style="grid-template-columns:1fr;max-width:640px">
-        <div class="section-card" style="max-width:100%">
-          <h3>Buy Panel — ₹200</h3>
-          <p class="section-sub">Click below to continue to payment and unlock the panel for 7 days.</p>
-          <button class="primary-btn" id="buyNowBtn" type="button">
-            Continue to Payment — ₹200
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= UNBAN PAYMENT ================= -->
-    <section id="paymentPanel">
       <div class="payment-layout">
-        <section class="amount-card">
-          <div class="amount-label">UNBAN VERIFICATION</div>
-          <div class="amount">₹400 <small>INR</small></div>
-          <div class="uid-display">UID: <b id="uidDisplay">—</b></div>
-          <div class="timer-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span id="timerText">05:00</span>
+
+        <section class="glass amount-card">
+          <div class="scarcity-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Only 3 slots left today
           </div>
-          <div class="fake-warning">⚠️ FAKE PAYMENT — NO UNBAN OKY</div>
+
+          <div class="amount-label">Unban Verification</div>
+          <div class="amount">₹500<small>INR</small></div>
+          <div class="strike-price"><s>₹1,200</s><em>SAVE 58%</em></div>
+          <div class="validity">Access duration • only 1 hour</div>
+
+          <div class="ring-timer">
+            <div class="ring">
+              <svg viewBox="0 0 76 76">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#fef3c7"/>
+                    <stop offset="60%" stop-color="#fbbf24"/>
+                    <stop offset="100%" stop-color="#f59e0b"/>
+                  </linearGradient>
+                </defs>
+                <circle class="ring-track" cx="38" cy="38" r="35"/>
+                <circle class="ring-progress" id="ringProgress" cx="38" cy="38" r="35"/>
+              </svg>
+              <div class="ring-time" id="timerText">05:00</div>
+            </div>
+            <div class="ring-meta">
+              <div class="lbl">Time Left</div>
+              <div class="desc">Complete payment before the timer ends.</div>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <strong>How to Pay</strong>
+            Scan the QR with any UPI app, OR tap the gold button to open your payment app directly.
+          </div>
+          <div class="fake-warning">⚠ Fake Payment — No Unban</div>
         </section>
 
-        <section class="qr-card">
-          <div class="qr-head">
+        <section class="glass pay-card">
+          <div class="pay-card-head">
             <div>
-              <h3>Pay ₹400</h3>
-              <p>Scan QR or copy UPI ID below.</p>
+              <h3>Pay ₹500</h3>
+              <p>Scan the QR below or tap the button to open your UPI app.</p>
             </div>
-            <span class="step-badge">STEP 1</span>
+            <span class="instant-badge">Instant</span>
           </div>
-          <div class="qr-stage">
-            <img class="qr-image" alt="UPI QR code for ₹400 payment" src="https://i.postimg.cc/QCgGTDNp/IMG-20260922-190311-364.jpg" />
+
+          <div class="qr-stage" id="qrStage" title="Tap to zoom">
+            <img class="qr-image" id="qrMainImg" alt="UPI QR code for ₹500 payment" src="https://i.postimg.cc/SQ2N8mrk/IMG-20260925-223625-016.jpg" loading="eager" />
           </div>
+          <div class="qr-hint">↑ Tap QR to zoom · long press to save</div>
+
           <div class="upi-row">
-            <code id="upiId1">proprogamer680@okhdfcbank</code>
-            <button class="copy-upi" data-target="upiId1" type="button">Copy UPI</button>
+            <code id="upiId">proprogamer680@okhdfcbank</code>
+            <button id="copyUpi" type="button">Copy</button>
           </div>
 
-          <div class="payment-form">
-            <div class="qr-head" style="margin-bottom:14px">
-              <div><h3 style="font-size:16px">Submit Reference</h3><p style="font-size:11px">Enter UTR and Gmail after payment.</p></div>
-              <span class="step-badge">STEP 2</span>
-            </div>
-            <div class="form-cols">
-              <div class="form-group" style="margin-top:0">
-                <label for="utr1">UTR Number</label>
-                <input id="utr1" type="text" inputmode="numeric" maxlength="24" placeholder="Enter UTR / reference" required />
-              </div>
-              <div class="form-group" style="margin-top:0">
-                <label for="contact1">Contact Gmail</label>
-                <input id="contact1" type="email" placeholder="you@gmail.com" required />
-              </div>
-            </div>
-            <button class="check-btn" data-form="1" type="button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Check Payment
-            </button>
-            <div class="check-status" id="checkStatus1"></div>
+          <a class="pay-app-btn" id="payAppBtn" href="#" role="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 18h.01"/></svg>
+            Pay ₹500 Now
+          </a>
+          <div class="pay-hint">Opens your default UPI app</div>
+
+          <div class="guarantee">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            100% Secure Payment · Money-Back Guarantee
           </div>
         </section>
-      </div>
-    </section>
 
-    <!-- ================= PANEL PAYMENT ================= -->
-    <section id="buyPayPanel">
-      <div class="payment-layout">
-        <section class="amount-card gold">
-          <div class="amount-label">PANEL ACCESS</div>
-          <div class="amount">₹200 <small>INR</small></div>
-          <div class="duration-pill">Valid for 7 Days</div>
-          <div class="timer-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span id="timerText2">05:00</span>
-          </div>
-          <div class="fake-warning">⚠️ FAKE PAYMENT — NO PANEL OKY</div>
-        </section>
-
-        <section class="qr-card">
-          <div class="qr-head">
-            <div>
-              <h3>Pay ₹200</h3>
-              <p>Scan QR or copy UPI ID below.</p>
-            </div>
-            <span class="step-badge">STEP 1</span>
-          </div>
-          <div class="qr-stage">
-            <img class="qr-image" alt="UPI QR code for ₹200 payment" src="https://i.postimg.cc/QCgGTDNp/IMG-20260922-190311-364.jpg" />
-          </div>
-          <div class="upi-row">
-            <code id="upiId2">proprogamer680@okhdfcbank</code>
-            <button class="copy-upi" data-target="upiId2" type="button">Copy UPI</button>
-          </div>
-
-          <div class="payment-form">
-            <div class="qr-head" style="margin-bottom:14px">
-              <div><h3 style="font-size:16px">Submit Reference</h3><p style="font-size:11px">Enter UTR and Gmail after payment.</p></div>
-              <span class="step-badge">STEP 2</span>
-            </div>
-            <div class="form-cols">
-              <div class="form-group" style="margin-top:0">
-                <label for="utr2">UTR Number</label>
-                <input id="utr2" type="text" inputmode="numeric" maxlength="24" placeholder="Enter UTR / reference" required />
-              </div>
-              <div class="form-group" style="margin-top:0">
-                <label for="contact2">Contact Gmail</label>
-                <input id="contact2" type="email" placeholder="you@gmail.com" required />
-              </div>
-            </div>
-            <button class="check-btn" data-form="2" type="button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Check Payment
-            </button>
-            <div class="check-status" id="checkStatus2"></div>
-          </div>
-        </section>
       </div>
     </section>
 
   </main>
 
-  <footer>FREE FIRE ID UNBAN • Premium access portal • Demo</footer>
+  <footer>Free Fire Unban • Premium Portal • Demo</footer>
   <div class="toast" id="toast" role="status"></div>
+
+  <!-- QR MODAL -->
+  <div class="qr-modal" id="qrModal" role="dialog" aria-modal="true" aria-label="QR zoom">
+    <div class="qr-modal-inner" id="qrModalInner">
+      <div class="qr-modal-head">
+        <div>
+          <h3>Scan to Pay</h3>
+          <div class="amt">₹500 · UPI</div>
+        </div>
+        <button class="qr-modal-close" id="qrModalClose" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="qr-modal-img-wrap">
+        <img class="qr-modal-img" id="qrModalImg" alt="UPI QR code zoomed" src="" />
+      </div>
+      <div class="qr-modal-actions">
+        <button class="qr-modal-btn download" id="qrDownload" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </button>
+        <button class="qr-modal-btn close2" id="qrClose2" type="button">Close</button>
+      </div>
+      <div class="qr-modal-hint">Long press to save on mobile</div>
+    </div>
+  </div>
 
   <script>
     const $ = (s) => document.querySelector(s);
-    const $$ = (s) => document.querySelectorAll(s);
-    const loader = $("#loader");
-    const bgMusic = $("#bgMusic");
+    const accessKey = $("#accessKey");
+    const copyState = $("#copyState");
     const toast = $("#toast");
+
+    const UPI_PA = "proprogamer680@okhdfcbank";
+    const UPI_PN = "DarkWeb Carding";
+    const UPI_AM = "500";
+    const UPI_CU = "INR";
+    const UPI_TN = "ORD687080";
+
+    const upiLink = "upi://pay?pa=" + encodeURIComponent(UPI_PA)
+      + "&pn=" + encodeURIComponent(UPI_PN)
+      + "&am=" + encodeURIComponent(UPI_AM)
+      + "&cu=" + encodeURIComponent(UPI_CU)
+      + "&tn=" + encodeURIComponent(UPI_TN);
+    $("#payAppBtn").setAttribute("href", upiLink);
 
     function notify(msg) {
       toast.textContent = msg;
       toast.classList.add("show");
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
     }
 
-    /* ---- MUSIC: start as soon as front page appears ---- */
-    function startMusic() {
-      bgMusic.volume = 0.55;
-      const p = bgMusic.play();
-      if (p && p.catch) {
-        p.catch(() => {
-          // Browser blocked autoplay — unlock on first user gesture
-          const unlock = () => {
-            bgMusic.play().catch(() => {});
-            document.removeEventListener("click", unlock);
-            document.removeEventListener("touchstart", unlock);
-            document.removeEventListener("keydown", unlock);
-          };
-          document.addEventListener("click", unlock, { once: true });
-          document.addEventListener("touchstart", unlock, { once: true });
-          document.addEventListener("keydown", unlock, { once: true });
-        });
+    async function copyText(text, msg) {
+      try { await navigator.clipboard.writeText(text); notify(msg); return true; }
+      catch {
+        const h = document.createElement("textarea");
+        h.value = text; h.style.position = "fixed"; h.style.opacity = "0";
+        document.body.appendChild(h); h.select(); document.execCommand("copy"); h.remove();
+        notify(msg); return true;
       }
     }
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loader.classList.add("hide");
-        startMusic(); // music starts exactly when front page shows
-      }, 3500);
-    });
-
-    /* ---- SCREEN NAV ---- */
-    function showScreen(screen) {
-      document.body.className = "screen-" + screen;
+    function showScreen(screen, push = true) {
+      document.body.classList.remove("screen-login", "screen-details", "screen-payment");
+      document.body.classList.add("screen-" + screen);
       $("#workspace").classList.toggle("visible", screen === "details");
       $("#paymentPanel").classList.toggle("visible", screen === "payment");
-      $("#buyPanel").classList.toggle("visible", screen === "buy");
-      $("#buyPayPanel").classList.toggle("visible", screen === "buypay");
+      if (push) history.pushState({ screen }, "", "#" + screen);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    /* ---- FRONT PAGE taps ---- */
-    const optUnban = $("#optUnban");
-    const optBuy = $("#optBuy");
-    optUnban.addEventListener("click", () => showScreen("details"));
-    optUnban.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showScreen("details"); } });
-    optBuy.addEventListener("click", () => showScreen("buy"));
-    optBuy.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showScreen("buy"); } });
+    const initialScreen = location.hash === "#details" || location.hash === "#payment" ? location.hash.slice(1) : "login";
+    showScreen(initialScreen, false);
+    window.addEventListener("popstate", (e) => showScreen(e.state?.screen || "login", false));
 
-    /* ---- BACK ---- */
     $("#backBtn").addEventListener("click", () => {
-      const cls = document.body.className;
-      if (cls.includes("screen-payment")) showScreen("details");
-      else if (cls.includes("screen-buypay")) showScreen("buy");
-      else if (cls.includes("screen-buy")) showScreen("front");
-      else showScreen("front");
+      if (document.body.classList.contains("screen-payment")) showScreen("details");
+      else showScreen("login");
     });
 
-    /* ---- UID form ---- */
+    window.addEventListener("load", async () => {
+      try {
+        await navigator.clipboard.writeText(accessKey.value);
+        copyState.textContent = "Key copied";
+      } catch {
+        copyState.textContent = "Tap Copy";
+      }
+    });
+
+    $("#pasteBtn").addEventListener("click", async () => {
+      try { accessKey.value = await navigator.clipboard.readText(); notify("Key pasted"); }
+      catch { accessKey.focus(); accessKey.select(); notify("Clipboard blocked — type or paste"); }
+    });
+
+    $("#loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (accessKey.value.trim() !== "accessffunbanid") {
+        notify("Invalid key — use accessffunbanid");
+        accessKey.focus();
+        return;
+      }
+      showScreen("details");
+    });
+
+    // ===== Game icon updates when select changes =====
+    const gameSelect = $("#game");
+    const gameIcon = $("#gameIcon");
+    gameSelect.addEventListener("change", () => {
+      const val = gameSelect.value;
+      gameIcon.classList.remove("bgmi", "ff");
+      if (val === "BGMI") {
+        gameIcon.classList.add("bgmi");
+        gameIcon.textContent = "BG";
+      } else if (val === "Free Fire") {
+        gameIcon.classList.add("ff");
+        gameIcon.textContent = "FF";
+      } else {
+        gameIcon.textContent = "?";
+      }
+    });
+
     $("#uid").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, ""); });
+
     $("#detailsForm").addEventListener("submit", (e) => {
       e.preventDefault();
+      if (!gameSelect.value) { notify("Please select a game"); return; }
       const uid = $("#uid").value.trim();
-      if (!/^\d+$/.test(uid)) { notify("UID must contain numbers only"); return; }
-      $("#uidDisplay").textContent = uid;
+      if (!/^\d+$/.test(uid)) { notify("UID must be numbers only"); return; }
       showScreen("payment");
-      startTimer(300, $("#timerText"));
+      startTimer(300);
     });
 
-    /* ---- Buy Now → go to panel payment ---- */
-    $("#buyNowBtn").addEventListener("click", () => {
-      showScreen("buypay");
-      startTimer(300, $("#timerText2"));
-    });
+    const RING_CIRC = 2 * Math.PI * 35;
+    const ringProgress = $("#ringProgress");
+    ringProgress.style.strokeDasharray = RING_CIRC;
 
-    /* ---- COPY UPI (works for both pages) ---- */
-    $$(".copy-upi").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const text = document.getElementById(btn.dataset.target).textContent;
-        try { await navigator.clipboard.writeText(text); notify("UPI ID copied"); }
-        catch { notify("Copy failed — select manually"); }
-      });
-    });
-
-    /* ---- TIMER (independent per payment page) ---- */
-    const timers = {};
-    function startTimer(seconds, el) {
-      const key = el.id;
-      if (timers[key]) clearInterval(timers[key]);
+    let timerId = null;
+    function startTimer(seconds) {
+      if (timerId) clearInterval(timerId);
+      const el = $("#timerText");
       let remaining = seconds;
+      const total = seconds;
       const tick = () => {
         const m = String(Math.floor(remaining / 60)).padStart(2, "0");
         const s = String(remaining % 60).padStart(2, "0");
         el.textContent = `${m}:${s}`;
-        if (remaining <= 0) { clearInterval(timers[key]); el.textContent = "00:00"; return; }
+        const offset = RING_CIRC * (1 - remaining / total);
+        ringProgress.style.strokeDashoffset = offset;
+        if (remaining <= 0) { clearInterval(timerId); el.textContent = "00:00"; return; }
         remaining--;
       };
       tick();
-      timers[key] = setInterval(tick, 1000);
+      timerId = setInterval(tick, 1000);
     }
 
-    /* ---- CHECK PAYMENT (works for both forms) ---- */
-    $$(".check-btn").forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const id = btn.dataset.form;
-        const status = $("#checkStatus" + id);
-        const utr = $("#utr" + id).value.trim();
-        const email = $("#contact" + id).value.trim();
-        const priceText = id === "1" ? "₹400" : "₹200";
-
-        if (!utr) { status.textContent = "Enter UTR number first."; status.className = "check-status error"; return; }
-        if (!email || !email.endsWith("@gmail.com")) { status.textContent = "Enter a valid Gmail address."; status.className = "check-status error"; return; }
-
-        btn.disabled = true;
-        status.className = "check-status";
-        status.textContent = "Checking payment…";
-
-        let dots = 0;
-        const dotInterval = setInterval(() => {
-          dots = (dots + 1) % 4;
-          status.textContent = "Checking payment" + ".".repeat(dots);
-        }, 600);
-
-        setTimeout(() => {
-          clearInterval(dotInterval);
-          status.textContent = "✕ Payment not received. Please pay " + priceText + " and try again.";
-          status.className = "check-status error";
-          btn.disabled = false;
-          // scroll back to QR
-          const qr = btn.closest(".qr-card").querySelector(".qr-stage");
-          qr.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 5600);
-      });
+    const copyBtn = $("#copyUpi");
+    copyBtn.addEventListener("click", async () => {
+      await copyText($("#upiId").textContent, "UPI ID copied");
+      copyBtn.textContent = "Copied ✓";
+      copyBtn.classList.add("copied");
+      setTimeout(() => {
+        copyBtn.textContent = "Copy";
+        copyBtn.classList.remove("copied");
+      }, 1800);
     });
+
+    $("#payAppBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = upiLink;
+    });
+
+    /* ===== QR ZOOM + DOWNLOAD ===== */
+    (function () {
+      const qrStage = $("#qrStage");
+      const qrImg = $("#qrMainImg");
+      const modal = $("#qrModal");
+      const modalImg = $("#qrModalImg");
+      const closeBtn = $("#qrModalClose");
+      const closeBtn2 = $("#qrClose2");
+      const downloadBtn = $("#qrDownload");
+
+      function openModal() {
+        if (!qrImg) return;
+        modalImg.src = qrImg.src;
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      if (qrStage) qrStage.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      closeBtn2.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+      downloadBtn.addEventListener("click", async () => {
+        const url = qrImg.src;
+        downloadBtn.disabled = true;
+        const originalText = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = "Downloading…";
+        try {
+          const res = await fetch(url, { mode: "cors" });
+          const blob = await res.blob();
+          const objUrl = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = objUrl;
+          a.download = "free-fire-unban-qr.jpg";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(() => URL.revokeObjectURL(objUrl), 4000);
+          downloadBtn.innerHTML = "Downloaded ✓";
+          setTimeout(() => { downloadBtn.innerHTML = originalText; downloadBtn.disabled = false; }, 1500);
+        } catch {
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "free-fire-unban-qr.jpg";
+          a.target = "_blank";
+          a.rel = "noopener";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          downloadBtn.innerHTML = originalText;
+          downloadBtn.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
