@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FREE FIRE ID UNBAN — Premium Access</title>
+  <meta name="description" content="FREE FIRE ID UNBAN premium access portal" />
+  <style>
+    :root {
+      --bg: #05070c;
+      --line: rgba(149, 181, 230, .15);
+      --text: #f5f8ff;
+      --muted: #8e9ab0;
+      --hot: #ff4d2e;
+      --hot-2: #ff7a5c;
+      --green: #80e86e;
+      --gold: #ffb347;
+      --shadow: 0 28px 90px rgba(0,0,0,.48);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-width: 320px; color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 77, 46, .18), transparent 28rem),
+        radial-gradient(circle at 92% 15%, rgba(255, 179, 71, .10), transparent 25rem),
+        linear-gradient(140deg, #03050a 0%, #08101d 48%, #03050a 100%);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .22;
+      background-image: linear-gradient(rgba(255,120,80,.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,120,80,.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* ===== LOADER ===== */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: grid; place-items: center;
+      background: #05070c;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #loader.hide { opacity: 0; visibility: hidden; }
+    .loader-inner { text-align: center; }
+    .loader-svg { width: 160px; height: 160px; }
+    .loader-svg circle, .loader-svg rect, .loader-svg polygon {
+      animation: loaderPulse 1.6s ease-in-out infinite;
+      transform-origin: 50px 50px;
+    }
+    .loader-svg rect { animation-delay: .2s; }
+    .loader-svg polygon { animation-delay: .4s; }
+    @keyframes loaderPulse {
+      0%, 100% { opacity: .25; transform: scale(.9) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.05) rotate(45deg); }
+    }
+    .loader-text {
+      margin-top: 24px; color: var(--hot);
+      font-size: 13px; font-weight: 850;
+      letter-spacing: .28em; text-transform: uppercase;
+      animation: textFlash 1.4s ease-in-out infinite;
+    }
+    @keyframes textFlash { 0%,100%{opacity:.35} 50%{opacity:1} }
+    .loader-bar {
+      width: 220px; height: 3px; margin: 18px auto 0;
+      background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden;
+    }
+    .loader-bar span {
+      display: block; height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--hot), var(--gold));
+      animation: barFill 3.4s ease forwards;
+    }
+    @keyframes barFill { to { width: 100%; } }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 10; height: 76px;
+      display: flex; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.075);
+      background: rgba(8, 9, 13, .7);
+      backdrop-filter: blur(18px);
+    }
+    .topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,77,46,.72), transparent); opacity: .7; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .back-btn { display: none; align-items: center; gap: 8px; padding: 9px 14px; color: #fff; border: 1px solid rgba(255,122,92,.5); border-radius: 9px; background: rgba(255,77,46,.14); font-size: 12px; font-weight: 800; }
+    .back-btn:hover { border-color: #ff7a5c; background: rgba(255,77,46,.24); }
+    body.screen-details .back-btn, body.screen-payment .back-btn, body.screen-buy .back-btn, body.screen-buypay .back-btn { display: inline-flex; }
+    .brand { display: flex; align-items: center; gap: 11px; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 36px; height: 36px; display: grid; place-items: center;
+      border-radius: 11px; color: #1a0500; font-size: 17px; font-weight: 950;
+      background: linear-gradient(140deg, #ffb347, #ff4d2e 55%, #d92e0f);
+      box-shadow: 0 8px 24px rgba(255, 77, 46, .38);
+      transform: skew(-7deg);
+    }
+    .brand strong { font-size: 15px; }
+    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .12em; margin-top: 2px; }
+    .status-pill {
+      display: flex; align-items: center; gap: 8px; padding: 9px 13px;
+      color: #b8eeb0; border: 1px solid rgba(128,232,110,.2);
+      border-radius: 99px; background: rgba(128,232,110,.07); font-size: 12px; font-weight: 750;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+
+    main { padding: 76px 0 62px; }
+
+    /* ===== FRONT PAGE ===== */
+    #frontPage { display: grid; place-items: center; min-height: calc(100vh - 190px); text-align: center; }
+    #frontPage h1 { font-size: clamp(42px, 8vw, 84px); line-height: .95; letter-spacing: -.07em; font-weight: 900; margin: 0 0 18px; }
+    #frontPage h1 span {
+      color: transparent;
+      background: linear-gradient(110deg, #fff 15%, #ffb347 51%, #ff4d2e 88%);
+      background-clip: text; -webkit-background-clip: text;
+    }
+    #frontPage > div > p { color: var(--muted); max-width: 520px; margin: 0 auto 20px; line-height: 1.7; font-size: 15px; }
+    .tap-hint {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 34px; padding: 8px 16px;
+      color: #ffb347; border: 1px dashed rgba(255,179,71,.4);
+      border-radius: 99px; background: rgba(255,179,71,.06);
+      font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+    @keyframes hintPulse { 0%,100%{opacity:.7} 50%{opacity:1} }
+    .tap-hint svg { width: 14px; height: 14px; }
+
+    .front-options { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .front-opt {
+      position: relative; width: 280px; padding: 30px 24px;
+      border: 2px solid var(--line); border-radius: 22px;
+      background: linear-gradient(145deg, rgba(16,28,49,.94), rgba(5,9,17,.96));
+      box-shadow: var(--shadow);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      text-align: left; cursor: pointer; overflow: hidden;
+    }
+    .front-opt::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,122,92,.08) 50%, transparent 60%);
+      transform: translateX(-100%); transition: transform .6s;
+    }
+    .front-opt:hover::before { transform: translateX(100%); }
+    .front-opt:hover { transform: translateY(-8px); border-color: rgba(255,77,46,.7); box-shadow: 0 30px 80px rgba(255,77,46,.22); }
+    .front-opt svg { width: 46px; height: 46px; margin-bottom: 18px; }
+    .front-opt h3 { margin: 0 0 8px; font-size: 21px; letter-spacing: -.03em; }
+    .front-opt p { margin: 0 0 16px; color: var(--muted); font-size: 12.5px; line-height: 1.6; }
+    .price-tag {
+      display: inline-flex; align-items: baseline; gap: 4px;
+      padding: 8px 14px; border-radius: 10px;
+      color: #1a0500; font-weight: 900; font-size: 17px;
+      background: linear-gradient(110deg, #ffb347, #ff4d2e);
+      box-shadow: 0 8px 20px rgba(255,77,46,.3);
+    }
+    .price-tag small { font-size: 11px; font-weight: 800; opacity: .8; }
+    .tap-cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 18px; padding: 12px; border-radius: 10px;
+      color: #fff; background: rgba(255,77,46,.16);
+      border: 1px solid rgba(255,77,46,.4);
+      font-size: 13px; font-weight: 850; letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .front-opt:hover .tap-cta { background: rgba(255,77,46,.28); border-color: #ff4d2e; }
+    .tap-cta svg { width: 14px; height: 14px; margin: 0; }
+
+    /* ===== SECTION CARD ===== */
+    .section-card {
+      padding: 30px; border: 1px solid var(--line); border-radius: 22px;
+      background: rgba(21,22,31,.78);
+      box-shadow: 0 18px 60px rgba(0,0,0,.2);
+      max-width: 640px; margin: 0 auto;
+      animation: rise .45s ease both;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: none; } }
+    .section-card h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em; }
+    .section-sub { margin: 0 0 24px; color: var(--muted); line-height: 1.6; font-size: 13px; }
+    .form-group { margin: 18px 0; }
+    label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 9px; color: #b5b5bf; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    label span { color: var(--hot-2); text-transform: none; letter-spacing: 0; font-size: 10px; }
+    input {
+      width: 100%; height: 52px;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 12px;
+      outline: none; padding: 0 15px; color: var(--text);
+      background: rgba(255,255,255,.055);
+      transition: border .2s, box-shadow .2s, background .2s;
+      font-size: 15px;
+    }
+    input::placeholder { color: #686974; }
+    input:focus { border-color: rgba(255,122,92,.9); box-shadow: 0 0 0 4px rgba(255,77,46,.16); background: rgba(255,255,255,.08); }
+
+    .primary-btn {
+      width: 100%; height: 56px; margin-top: 6px;
+      border: 0; border-radius: 12px;
+      font-weight: 900; letter-spacing: .02em; font-size: 15px;
+      color: #1a0500;
+      background: linear-gradient(110deg, #ffb347, #ff4d2e 47%, #d92e0f);
+      box-shadow: 0 12px 28px rgba(255, 77, 46, .3);
+      transition: transform .2s, filter .2s, box-shadow .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .primary-btn:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 16px 33px rgba(255,77,46,.42); }
+    .primary-btn svg { width: 18px; height: 18px; }
+
+    /* ===== SCREENS ===== */
+    #workspace, #buyPanel { display: none; min-height: calc(100vh - 190px); padding-top: 34px; }
+    #workspace.visible, #buyPanel.visible { display: block; }
+    #paymentPanel, #buyPayPanel { display: none; min-height: calc(100vh - 190px); padding-top: 34px; }
+    #paymentPanel.visible, #buyPayPanel.visible { display: block; }
+
+    /* ===== PAYMENT LAYOUT (shared by unban + panel) ===== */
+    .payment-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; max-width: 920px; margin: 0 auto; }
+    .amount-card {
+      position: relative; overflow: hidden; padding: 30px;
+      border: 1px solid rgba(255,77,46,.34); border-radius: 22px;
+      background: linear-gradient(145deg, rgba(74,11,11,.86), rgba(25,7,7,.94));
+      animation: rise .45s ease both;
+    }
+    .amount-card.gold {
+      border-color: rgba(255,179,71,.4);
+      background: linear-gradient(145deg, rgba(74,52,11,.86), rgba(25,17,7,.94));
+    }
+    .amount-card::after { content: "₹"; position: absolute; right: -9px; bottom: -44px; color: rgba(255,77,46,.12); font-size: 200px; font-weight: 900; line-height: 1; }
+    .amount-card.gold::after { color: rgba(255,179,71,.12); }
+    .amount-label { color: #ffb347; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+    .amount { position: relative; z-index: 1; margin: 8px 0 4px; font-size: 62px; line-height: 1; letter-spacing: -.07em; font-weight: 900; }
+    .amount small { margin-left: 6px; color: #ff7a5c; font-size: 18px; letter-spacing: 0; }
+    .duration-pill {
+      display: inline-block; position: relative; z-index: 1;
+      margin-top: 10px; padding: 6px 14px;
+      border-radius: 99px;
+      background: rgba(255,179,71,.14);
+      border: 1px solid rgba(255,179,71,.4);
+      color: #ffb347; font-size: 12px; font-weight: 850;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .uid-display {
+      position: relative; z-index: 1;
+      margin: 16px 0 0; padding: 12px 14px;
+      border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.24);
+      font-size: 12px; color: #ffbaa9; font-weight: 750;
+      letter-spacing: .04em;
+    }
+    .uid-display b { color: #fff; font-weight: 900; letter-spacing: .1em; }
+    .timer-row { display: flex; align-items: center; gap: 10px; margin-top: 16px; color: #ffb347; font-size: 14px; font-weight: 850; position: relative; z-index: 1; }
+    .timer-row svg { width: 18px; height: 18px; }
+    .fake-warning { position: relative; z-index: 1; margin-top: 22px; padding: 14px 16px; border: 1px solid rgba(255,79,53,.38); border-radius: 12px; color: #ffbaa9; background: rgba(156,29,21,.16); text-align: center; font-size: 12px; font-weight: 900; letter-spacing: .05em; }
+
+    .qr-card { padding: 26px; border: 1px solid var(--line); border-radius: 22px; background: rgba(21,22,31,.78); animation: rise .45s ease both; }
+    .qr-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .qr-head h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+    .qr-head p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+    .step-badge {
+      padding: 6px 10px; border-radius: 8px;
+      color: #1a0500; background: linear-gradient(110deg, #ffb347, #ff4d2e);
+      font-size: 10px; font-weight: 900; letter-spacing: .1em;
+      white-space: nowrap;
+    }
+    .qr-stage { display: grid; place-items: center; min-height: 220px; border: 1px dashed rgba(255,255,255,.13); border-radius: 14px; background: #f4f1e9; }
+    .qr-image { display: block; width: 200px; height: 200px; image-rendering: pixelated; border-radius: 6px; }
+    .upi-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      margin-top: 14px; padding: 12px 14px; border-radius: 10px;
+      color: #dedee5; background: rgba(255,255,255,.045);
+      font-size: 12px;
+    }
+    .upi-row code { color: #ff7a5c; font-size: 11.5px; font-weight: 800; word-break: break-all; }
+    .upi-row button { border: 0; color: #ffb347; background: none; font-size: 11px; font-weight: 850; white-space: nowrap; }
+    .payment-form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .form-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .check-btn {
+      width: 100%; height: 56px; margin-top: 6px;
+      border: 0; border-radius: 12px;
+      font-weight: 900; font-size: 15px;
+      color: #1a0500;
+      background: linear-gradient(110deg, #ffb347, #ff4d2e 47%, #d92e0f);
+      box-shadow: 0 12px 28px rgba(255,77,46,.3);
+      transition: transform .2s, filter .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .check-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-2px); }
+    .check-btn:disabled { filter: grayscale(.6); transform: none; cursor: not-allowed; }
+    .check-btn svg { width: 18px; height: 18px; }
+    .check-status { margin-top: 14px; color: var(--muted); font-size: 12.5px; text-align: center; min-height: 18px; font-weight: 700; }
+    .check-status.error { color: #ff7a5c; font-weight: 850; }
+    .check-status.success { color: var(--green); font-weight: 850; }
+
+    /* ===== BUY PANEL INFO ===== */
+    .panel-intro { max-width: 920px; margin: 0 auto 22px; padding: 26px 28px; border: 1px solid var(--line); border-radius: 22px; background: rgba(21,22,31,.78); animation: rise .45s ease both; }
+    .panel-intro h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.03em; }
+    .panel-intro p { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .panel-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .panel-feature {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(255,255,255,.03);
+      font-size: 12.5px; color: #d8dde8; font-weight: 700;
+    }
+    .panel-feature svg { width: 16px; height: 16px; flex-shrink: 0; stroke: var(--green); }
+
+    footer { padding: 0 0 34px; color: #5f606a; text-align: center; font-size: 11px; }
+    .toast { position: fixed; z-index: 30; right: 20px; bottom: 20px; max-width: calc(100vw - 40px); padding: 12px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; color: #eee; background: #1b1c25; box-shadow: var(--shadow); font-size: 12.5px; font-weight: 700; transform: translateY(120px); opacity: 0; transition: .3s ease; }
+    .toast.show { transform: none; opacity: 1; }
+
+    body.screen-front #workspace, body.screen-front #paymentPanel, body.screen-front #buyPanel, body.screen-front #buyPayPanel { display: none; }
+    body.screen-details #frontPage, body.screen-details #paymentPanel, body.screen-details #buyPanel, body.screen-details #buyPayPanel { display: none; }
+    body.screen-payment #frontPage, body.screen-payment #workspace, body.screen-payment #buyPanel, body.screen-payment #buyPayPanel { display: none; }
+    body.screen-payment #paymentPanel { display: block; }
+    body.screen-buy #frontPage, body.screen-buy #workspace, body.screen-buy #paymentPanel, body.screen-buy #buyPayPanel { display: none; }
+    body.screen-buy #buyPanel { display: block; }
+    body.screen-buypay #frontPage, body.screen-buypay #workspace, body.screen-buypay #paymentPanel, body.screen-buypay #buyPanel { display: none; }
+    body.screen-buypay #buyPayPanel { display: block; }
+
+    @media (max-width: 850px) {
+      .payment-layout { grid-template-columns: 1fr; }
+      #frontPage h1 { font-size: 52px; }
+      .front-opt { width: 100%; max-width: 360px; }
+      .panel-features { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 28px, 1120px); }
+      .topbar { height: 67px; }
+      .brand small { font-size: 8px; }
+      .section-card, .amount-card, .qr-card, .panel-intro { padding: 22px; border-radius: 18px; }
+      .form-cols, .panel-features { grid-template-columns: 1fr; }
+      .loader-svg { width: 120px; height: 120px; }
+      .amount { font-size: 52px; }
+    }
+  </style>
+</head>
+<body class="screen-front">
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-inner">
+      <svg class="loader-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="34" stroke="#ff4d2e" stroke-width="4" stroke-dasharray="10 8" />
+        <rect x="30" y="30" width="40" height="40" rx="8" stroke="#ffb347" stroke-width="4" />
+        <polygon points="50,18 78,78 22,78" stroke="#ff7a5c" stroke-width="4" stroke-linejoin="round" />
+      </svg>
+      <div class="loader-text">Initializing Portal</div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.image2url.com/r2/default/audio/1790159602117-7fbfef5a-1ff3-4bf2-b391-ffcd4348d0db.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">U</div>
+        <div><strong>FREE FIRE ID UNBAN</strong><small>PREMIUM ACCESS PORTAL</small></div>
+      </div>
+      <button class="back-btn" id="backBtn" type="button">← Back</button>
+      <div class="status-pill"><span class="status-dot"></span> Online</div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- ================= FRONT PAGE ================= -->
+    <section id="frontPage">
+      <div>
+        <h1>UNBAN YOUR<br /><span>FREE FIRE ACCOUNT</span></h1>
+        <p>Premium unban service. Fast check. UID protected. Owner review.</p>
+        <div class="tap-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 114 0v5"/><path d="M13 11V9a2 2 0 114 0v2"/><path d="M17 11v-1a2 2 0 114 0v6a6 6 0 01-6 6h-3a6 6 0 01-6-6v-3a2 2 0 114 0"/></svg>
+          Tap any option below to continue
+        </div>
+        <div class="front-options">
+          <div class="front-opt" id="optUnban" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff4d2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <h3>Unban Account</h3>
+            <p>Enter your UID and pay to start the unban process.</p>
+            <div class="price-tag">₹400 <small>INR</small></div>
+            <div class="tap-cta">
+              Tap to Unban
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
+          </div>
+          <div class="front-opt" id="optBuy" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M7 8a3 3 0 010-6c2 0 5 3 5 6"/><path d="M17 8a3 3 0 000-6c-2 0-5 3-5 6"/></svg>
+            <h3>Buy Panel</h3>
+            <p>Premium ESP + aimbot panel access. Full features.</p>
+            <div class="price-tag">₹200 <small>7 DAYS</small></div>
+            <div class="tap-cta">
+              Tap to Buy
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DETAILS ================= -->
+    <section id="workspace">
+      <div class="section-card">
+        <h3>Account Details</h3>
+        <p class="section-sub">Enter your Free Fire UID to continue to payment.</p>
+        <form id="detailsForm">
+          <div class="form-group">
+            <label for="uid">Player UID <span>Numbers only</span></label>
+            <input id="uid" type="text" inputmode="numeric" pattern="[0-9]+" maxlength="16" placeholder="Enter your numeric UID" required />
+          </div>
+          <button class="primary-btn" type="submit">
+            Continue to Payment
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= BUY PANEL INFO ================= -->
+    <section id="buyPanel">
+      <div class="panel-intro">
+        <h3>Premium Panel Access</h3>
+        <p>Full cheat panel. ESP, aimbot, auto-headshot and more. Instant access after payment. ₹200 for 7 days.</p>
+        <div class="panel-features">
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>ESP (Wallhack)</div>
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aimbot + Silent Aim</div>
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Auto Headshot</div>
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No Recoil + Fast Fire</div>
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Anti-Ban Protection</div>
+          <div class="panel-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Instant Delivery</div>
+        </div>
+      </div>
+
+      <div class="payment-layout" style="grid-template-columns:1fr;max-width:640px">
+        <div class="section-card" style="max-width:100%">
+          <h3>Buy Panel — ₹200</h3>
+          <p class="section-sub">Click below to continue to payment and unlock the panel for 7 days.</p>
+          <button class="primary-btn" id="buyNowBtn" type="button">
+            Continue to Payment — ₹200
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= UNBAN PAYMENT ================= -->
+    <section id="paymentPanel">
+      <div class="payment-layout">
+        <section class="amount-card">
+          <div class="amount-label">UNBAN VERIFICATION</div>
+          <div class="amount">₹400 <small>INR</small></div>
+          <div class="uid-display">UID: <b id="uidDisplay">—</b></div>
+          <div class="timer-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span id="timerText">05:00</span>
+          </div>
+          <div class="fake-warning">⚠️ FAKE PAYMENT — NO UNBAN OKY</div>
+        </section>
+
+        <section class="qr-card">
+          <div class="qr-head">
+            <div>
+              <h3>Pay ₹400</h3>
+              <p>Scan QR or copy UPI ID below.</p>
+            </div>
+            <span class="step-badge">STEP 1</span>
+          </div>
+          <div class="qr-stage">
+            <img class="qr-image" alt="UPI QR code for ₹400 payment" src="https://i.postimg.cc/QCgGTDNp/IMG-20260922-190311-364.jpg" />
+          </div>
+          <div class="upi-row">
+            <code id="upiId1">proprogamer680@okhdfcbank</code>
+            <button class="copy-upi" data-target="upiId1" type="button">Copy UPI</button>
+          </div>
+
+          <div class="payment-form">
+            <div class="qr-head" style="margin-bottom:14px">
+              <div><h3 style="font-size:16px">Submit Reference</h3><p style="font-size:11px">Enter UTR and Gmail after payment.</p></div>
+              <span class="step-badge">STEP 2</span>
+            </div>
+            <div class="form-cols">
+              <div class="form-group" style="margin-top:0">
+                <label for="utr1">UTR Number</label>
+                <input id="utr1" type="text" inputmode="numeric" maxlength="24" placeholder="Enter UTR / reference" required />
+              </div>
+              <div class="form-group" style="margin-top:0">
+                <label for="contact1">Contact Gmail</label>
+                <input id="contact1" type="email" placeholder="you@gmail.com" required />
+              </div>
+            </div>
+            <button class="check-btn" data-form="1" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Check Payment
+            </button>
+            <div class="check-status" id="checkStatus1"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ================= PANEL PAYMENT ================= -->
+    <section id="buyPayPanel">
+      <div class="payment-layout">
+        <section class="amount-card gold">
+          <div class="amount-label">PANEL ACCESS</div>
+          <div class="amount">₹200 <small>INR</small></div>
+          <div class="duration-pill">Valid for 7 Days</div>
+          <div class="timer-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffb347" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span id="timerText2">05:00</span>
+          </div>
+          <div class="fake-warning">⚠️ FAKE PAYMENT — NO PANEL OKY</div>
+        </section>
+
+        <section class="qr-card">
+          <div class="qr-head">
+            <div>
+              <h3>Pay ₹200</h3>
+              <p>Scan QR or copy UPI ID below.</p>
+            </div>
+            <span class="step-badge">STEP 1</span>
+          </div>
+          <div class="qr-stage">
+            <img class="qr-image" alt="UPI QR code for ₹200 payment" src="https://i.postimg.cc/QCgGTDNp/IMG-20260922-190311-364.jpg" />
+          </div>
+          <div class="upi-row">
+            <code id="upiId2">proprogamer680@okhdfcbank</code>
+            <button class="copy-upi" data-target="upiId2" type="button">Copy UPI</button>
+          </div>
+
+          <div class="payment-form">
+            <div class="qr-head" style="margin-bottom:14px">
+              <div><h3 style="font-size:16px">Submit Reference</h3><p style="font-size:11px">Enter UTR and Gmail after payment.</p></div>
+              <span class="step-badge">STEP 2</span>
+            </div>
+            <div class="form-cols">
+              <div class="form-group" style="margin-top:0">
+                <label for="utr2">UTR Number</label>
+                <input id="utr2" type="text" inputmode="numeric" maxlength="24" placeholder="Enter UTR / reference" required />
+              </div>
+              <div class="form-group" style="margin-top:0">
+                <label for="contact2">Contact Gmail</label>
+                <input id="contact2" type="email" placeholder="you@gmail.com" required />
+              </div>
+            </div>
+            <button class="check-btn" data-form="2" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Check Payment
+            </button>
+            <div class="check-status" id="checkStatus2"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>FREE FIRE ID UNBAN • Premium access portal • Demo</footer>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+    const loader = $("#loader");
+    const bgMusic = $("#bgMusic");
+    const toast = $("#toast");
+
+    function notify(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    /* ---- MUSIC: start as soon as front page appears ---- */
+    function startMusic() {
+      bgMusic.volume = 0.55;
+      const p = bgMusic.play();
+      if (p && p.catch) {
+        p.catch(() => {
+          // Browser blocked autoplay — unlock on first user gesture
+          const unlock = () => {
+            bgMusic.play().catch(() => {});
+            document.removeEventListener("click", unlock);
+            document.removeEventListener("touchstart", unlock);
+            document.removeEventListener("keydown", unlock);
+          };
+          document.addEventListener("click", unlock, { once: true });
+          document.addEventListener("touchstart", unlock, { once: true });
+          document.addEventListener("keydown", unlock, { once: true });
+        });
+      }
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loader.classList.add("hide");
+        startMusic(); // music starts exactly when front page shows
+      }, 3500);
+    });
+
+    /* ---- SCREEN NAV ---- */
+    function showScreen(screen) {
+      document.body.className = "screen-" + screen;
+      $("#workspace").classList.toggle("visible", screen === "details");
+      $("#paymentPanel").classList.toggle("visible", screen === "payment");
+      $("#buyPanel").classList.toggle("visible", screen === "buy");
+      $("#buyPayPanel").classList.toggle("visible", screen === "buypay");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ---- FRONT PAGE taps ---- */
+    const optUnban = $("#optUnban");
+    const optBuy = $("#optBuy");
+    optUnban.addEventListener("click", () => showScreen("details"));
+    optUnban.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showScreen("details"); } });
+    optBuy.addEventListener("click", () => showScreen("buy"));
+    optBuy.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showScreen("buy"); } });
+
+    /* ---- BACK ---- */
+    $("#backBtn").addEventListener("click", () => {
+      const cls = document.body.className;
+      if (cls.includes("screen-payment")) showScreen("details");
+      else if (cls.includes("screen-buypay")) showScreen("buy");
+      else if (cls.includes("screen-buy")) showScreen("front");
+      else showScreen("front");
+    });
+
+    /* ---- UID form ---- */
+    $("#uid").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, ""); });
+    $("#detailsForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const uid = $("#uid").value.trim();
+      if (!/^\d+$/.test(uid)) { notify("UID must contain numbers only"); return; }
+      $("#uidDisplay").textContent = uid;
+      showScreen("payment");
+      startTimer(300, $("#timerText"));
+    });
+
+    /* ---- Buy Now → go to panel payment ---- */
+    $("#buyNowBtn").addEventListener("click", () => {
+      showScreen("buypay");
+      startTimer(300, $("#timerText2"));
+    });
+
+    /* ---- COPY UPI (works for both pages) ---- */
+    $$(".copy-upi").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = document.getElementById(btn.dataset.target).textContent;
+        try { await navigator.clipboard.writeText(text); notify("UPI ID copied"); }
+        catch { notify("Copy failed — select manually"); }
+      });
+    });
+
+    /* ---- TIMER (independent per payment page) ---- */
+    const timers = {};
+    function startTimer(seconds, el) {
+      const key = el.id;
+      if (timers[key]) clearInterval(timers[key]);
+      let remaining = seconds;
+      const tick = () => {
+        const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+        const s = String(remaining % 60).padStart(2, "0");
+        el.textContent = `${m}:${s}`;
+        if (remaining <= 0) { clearInterval(timers[key]); el.textContent = "00:00"; return; }
+        remaining--;
+      };
+      tick();
+      timers[key] = setInterval(tick, 1000);
+    }
+
+    /* ---- CHECK PAYMENT (works for both forms) ---- */
+    $$(".check-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const id = btn.dataset.form;
+        const status = $("#checkStatus" + id);
+        const utr = $("#utr" + id).value.trim();
+        const email = $("#contact" + id).value.trim();
+        const priceText = id === "1" ? "₹400" : "₹200";
+
+        if (!utr) { status.textContent = "Enter UTR number first."; status.className = "check-status error"; return; }
+        if (!email || !email.endsWith("@gmail.com")) { status.textContent = "Enter a valid Gmail address."; status.className = "check-status error"; return; }
+
+        btn.disabled = true;
+        status.className = "check-status";
+        status.textContent = "Checking payment…";
+
+        let dots = 0;
+        const dotInterval = setInterval(() => {
+          dots = (dots + 1) % 4;
+          status.textContent = "Checking payment" + ".".repeat(dots);
+        }, 600);
+
+        setTimeout(() => {
+          clearInterval(dotInterval);
+          status.textContent = "✕ Payment not received. Please pay " + priceText + " and try again.";
+          status.className = "check-status error";
+          btn.disabled = false;
+          // scroll back to QR
+          const qr = btn.closest(".qr-card").querySelector(".qr-stage");
+          qr.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 5600);
+      });
+    });
+  </script>
+</body>
+</html>
